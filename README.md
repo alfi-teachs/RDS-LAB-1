@@ -30,7 +30,7 @@ Add inbound rules:
 
 Click Launch
 
-🔹 Step 2: Connect to EC2
+#🔹 Step 2: Connect to EC2
 ```bash
 ssh -i key.pem ec2-user@<EC2-PUBLIC-IP>
 ```
@@ -43,23 +43,24 @@ sudo su
 ```bash
 yum update -y
 ```
-4. Install Docker
+# step 3
+1. Install Docker
 ```bash
 yum install docker -y
 ```
-5. Start Docker service
+2. Start Docker service
 ```bash
 systemctl start docker
 ```
-6. Check Docker status
+3. Check Docker status
 ```bash
 systemctl status docker
 ```
-7. Enable Docker on boot (important)
+4. Enable Docker on boot (important)
 ```bash
 systemctl enable docker
 ```
-8. Test Docker
+5. Test Docker
 ```bash
 docker run hello-world
 ```
