@@ -1,6 +1,7 @@
 # RDS-LAB-1
 
 # Step 1
+
 🚀 Create EC2 Linux Instance (Quick Steps)
 
 Go to EC2 → Launch Instance
@@ -32,12 +33,59 @@ Click Launch
 
 🔐 Connect
 connect to server 
-
+1. Connect to your EC2 instance
+  
+2. Switch to root user
+```bash
 sudo su
-sudo yum update
-sudo yum install docker -y 
-sudo systemctl start docker 
-sudo systemctl status docker 
+```
+3. Update packages
+yum update -y
+
+4. Install Docker
+yum install docker -y
+
+5. Start Docker service
+systemctl start docker
+
+6. Check Docker status
+systemctl status docker
+
+7. Enable Docker on boot (important)
+systemctl enable docker
+
+8. Test Docker
+docker run hello-world
+
+# step 4
+
+Steps to Run phpMyAdmin using Docker
+1. Pull phpMyAdmin Image from Docker Hub
+docker pull phpmyadmin
+
+2. Verify Image Downloaded
+docker images
+
+3. Run phpMyAdmin Container
+Usage with arbitrary server
+docker run --name phpmyadmin -d -e PMA_ARBITRARY=1 -p 8080:80 phpmyadmin
+
+What this does:
+
+--name phpmyadmin → container name
+-d → run in background
+-e PMA_ARBITRARY=1 → connect to any MySQL server
+-p 8080:80 → access via browser on port 8080
+
+4. Check Running Containers
+docker ps
+
+5. Access phpMyAdmin in Browser
+http://<EC2-PUBLIC-IP>:8080
+
+⚠️ Important
+Make sure port 8080 is open in your EC2 Security Group
+You need a MySQL server to connect inside phpMyAdmin
 
 from docker hub pull
 phpmyadmin 
