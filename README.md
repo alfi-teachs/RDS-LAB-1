@@ -289,9 +289,13 @@ URL:
 http://<EC2-Public-IP>:8080/phpmyadmin
 ```
 Login:
+
 Language: English
+
 Server: RDS Endpoint
+
 Username: admin
+
 Password: admin12345
 
 
