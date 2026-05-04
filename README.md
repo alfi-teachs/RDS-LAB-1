@@ -1,7 +1,38 @@
 # RDS-LAB-1
 
-create ec2 with az key pair ubuntu 
+# Step 1
+🚀 Create EC2 Linux Instance (Quick Steps)
+
+Go to EC2 → Launch Instance
+
+Enter Name
+
+Select AMI
+
+Amazon Linux / Ubuntu
+
+Choose Instance Type
+
+t2.micro
+
+Create Key Pair
+Download .pem
+
+Select Network
+Choose VPC
+Select Subnet (this decides AZ)
+
+Configure Security Group
+
+Allow SSH (port 22 → My IP)
+
+customTCP PORT 8080 ANYWHERE IP 
+
+Click Launch
+
+🔐 Connect
 connect to server 
+
 sudo su
 sudo yum update
 sudo yum install docker -y 
