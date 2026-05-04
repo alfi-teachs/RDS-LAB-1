@@ -2,32 +2,32 @@
 
 # Step 1
 
-🚀 Create EC2 Linux Instance (Quick Steps)
+Go to AWS Console → EC2 → Launch Instance
 
-Go to EC2 → Launch Instance
+Configure:
 
-Enter Name
+Name: any (e.g., rds-client)
 
-Select AMI
+AMI: Amazon Linux 2
 
-Amazon Linux / Ubuntu
+Instance Type: t2.micro
 
-Choose Instance Type
+Key Pair: Create and download .pem
 
-t2.micro
+Network Settings:
 
-Create Key Pair
-Download .pem
+Select your VPC
+Select Subnet (AZ)
 
-Select Network
-Choose VPC
-Select Subnet (this decides AZ)
+Security Group (Very Important):
+Add inbound rules:
+| type        | port         | source  |
+|-------------|--------------|---------|
+| SSH         | 22           | MY IP   |
+| CUSTOM TCP  | 8080         |  Anywhere (0.0.0.0/0) |
 
-Configure Security Group
 
-Allow SSH (port 22 → My IP)
-
-customTCP PORT 8080 ANYWHERE IP 
+type 
 
 Click Launch
 
