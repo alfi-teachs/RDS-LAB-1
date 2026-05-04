@@ -102,7 +102,9 @@ What this does:
 ```bash
 docker ps
 ```
-6. Access phpMyAdmin in Browser
+# Step 5
+
+1. Access phpMyAdmin in Browser
 
 ```bash
 http://<EC2-PUBLIC-IP>:8080
