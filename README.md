@@ -113,46 +113,87 @@ Make sure port 8080 is open in your EC2 Security Group
 You need a MySQL server to connect inside phpMyAdmin
 --------------------------------------------------------
 # 🔹 Step 1: Open RDS Service
+
 Go to AWS Console
+
 Search → RDS
+
 Click Create database
+
 # 🔹 Step 2: Choose Database Creation Method
+
 Select: Standard create (Full configuration)
+
 # 🔹 Step 3: Engine Options
+
 Engine type: MySQL
+
 Edition: MySQL Community
+
 Version: Latest
+
 # 🔹 Step 4: Templates
+
 Select: Sandbox (for practice / lab)
+
 # 🔹 Step 5: Settings
+
 DB instance identifier: database-1
+
 Master username: admin
+
 Password: admin12345
+
 Confirm password: admin12345
+
 Credentials management: Self-managed
+
 # 🔹 Step 6: Instance Configuration
+
 Instance class: Burstable (t class)
+
 Instance type: db.t4g.micro (small and cost-effective)
+
 # 🔹 Step 7: Storage
+
 Storage type: General Purpose (gp2)
+
 Allocated storage: 20 GB
+
 Enable storage autoscaling: ✅ Yes
+
 Maximum storage threshold: 1000 GB
+
 # 🔹 Step 8: Connectivity
+
 Connect to EC2 compute resource: ✅ Yes
+
 Select EC2 instance: (choose your EC2)
+
 # 🔹 Step 9: Network Settings
+
 DB subnet group: Choose existing
+
 Select your VPC subnet group
+
 Public access: ❌ No (private DB for security)
+
 VPC security group:
+
 Select: Choose existing
+
 Add security group: (same SG as EC2 or allow MySQL port 3306)
+
 Availability Zone: Automatic
+
 # 🔹 Step 10: Additional Settings
+
 Keep everything default
+
 # 🔹 Step 11: Create Database
+
 Click Create database
+
 # 🔹 Important After Creation
 
 Once DB is ready:
@@ -162,130 +203,98 @@ Go to RDS → Databases
 Copy Endpoint
 
 Connect from EC2:
+
 ```bash
 mysql -h <endpoint> -u admin -p
 ```
-
-Enter password:
-🔹 Step 1: Open RDS Service
-Go to AWS Console
-Search → RDS
-Click Create database
-🔹 Step 2: Choose Database Creation Method
-Select: Standard create (Full configuration)
-🔹 Step 3: Engine Options
-Engine type: MySQL
-Edition: MySQL Community
-Version: Latest
-🔹 Step 4: Templates
-Select: Sandbox (for practice / lab)
-🔹 Step 5: Settings
-DB instance identifier: database-1
-Master username: admin
-Password: admin12345
-Confirm password: admin12345
-Credentials management: Self-managed
-🔹 Step 6: Instance Configuration
-Instance class: Burstable (t class)
-Instance type: db.t4g.micro (small and cost-effective)
-🔹 Step 7: Storage
-Storage type: General Purpose (gp2)
-Allocated storage: 20 GB
-Enable storage autoscaling: ✅ Yes
-Maximum storage threshold: 1000 GB
-🔹 Step 8: Connectivity
-Connect to EC2 compute resource: ✅ Yes
-Select EC2 instance: (choose your EC2)
-🔹 Step 9: Network Settings
-DB subnet group: Choose existing
-Select your VPC subnet group
-Public access: ❌ No (private DB for security)
-VPC security group:
-Select: Choose existing
-Add security group: (same SG as EC2 or allow MySQL port 3306)
-Availability Zone: Automatic
-🔹 Step 10: Additional Settings
-Keep everything default
-🔹 Step 11: Create Database
-Click Create database
-🔹 Important After Creation
-
-Once DB is ready:
-
-Go to RDS → Databases
-Copy Endpoint
-Connect from EC2:
-mysql -h <endpoint> -u admin -p
-
-
 Enter password:
 ```bash
 admin12345
-admin12345
 ```
+---------------------------------------------------------------------------
 
-✅ Step 1: Ensure RDS is Created
-RDS MySQL instance should be Available
+✅ Step 1: Ensure RDS is Ready
+RDS MySQL instance status: Available
 Copy the RDS Endpoint
-✅ Step 2: Configure Security Group (Important)
-Go to RDS → Security Group
-Add inbound rule:
+
+✅ Step 2: Configure Security Groups
+🔸 RDS Security Group (Important)
+Go to RDS → Security Group → Inbound Rules
+Add:
 Type: MySQL/Aurora
 Port: 3306
 Source: EC2 Security Group
+
+✔ This allows EC2 to talk to RDS
+
+🔸 EC2 Security Group
+Default outbound is allowed ✅ (no change needed)
+
+(Optional — only if using browser tools later)
+
+Add:
+Type: Custom TCP
+Port: 8080
+Source: Anywhere (0.0.0.0/0)
+
+
 ✅ Step 3: Connect to EC2
-Open EC2 terminal (SSH)
-✅ Step 4: Install MySQL Client (NOT Server)
+
+SSH into EC2:
+
+ssh -i key.pem ec2-user@<EC2-Public-IP>
+
+✅ Step 4: Install MySQL Client (Only)
 sudo yum update -y
 sudo yum install -y mariadb
 
+
+✔ Installs MySQL client to connect RDS
+
+
 ✅ Step 5: Connect to RDS Database
-mysql -h <RDS-endpoint> -u admin -p
+mysql -h database-1.c1q0e0awq6n7.ap-south-1.rds.amazonaws.com -u admin -p
+
 
 Enter password:
+
 admin12345
 
-🔹 Final Architecture Understanding
-RDS → Database Server
-EC2 → Client machine
+✅ Step 6: Run MySQL Commands
+SHOW DATABASES;
 
-🔥 Quick Check if Connection Fails
-RDS status = Available
-Correct endpoint used
-Port 3306 open in Security Group
-EC2 and RDS in same VPC
+CREATE DATABASE db1;
 
+SHOW DATABASES;
 
-Ensure RDS Security Group
+✅ Step 7: Exit MySQL
+exit;
 
-In RDS Security Group → Inbound Rules:
+🔹 (Optional) Step 8: Browser Login (phpMyAdmin)
 
-Type: MySQL/Aurora
-Port: 3306
-Source: EC2 Security Group
+If configured:
 
-Connect to RDS Database
-mysql -h <RDS-endpoint> -u admin -p
+URL:
+http://<EC2-Public-IP>:8080/phpmyadmin
 
-Enter password:
-admin12345
-
-
-Step 5: Login Details
+Login:
 Language: English
-Server: RDS Endpoint (paste it)
+Server: RDS Endpoint
 Username: admin
 Password: admin12345
 
 
+🔹 Final Architecture
+RDS → MySQL Database Server
+EC2 → Client machine (connects to RDS)
+🔥 Troubleshooting Checklist
+RDS status = Available
+Correct endpoint used
+Port 3306 open in RDS SG
+EC2 & RDS in same VPC
+Username/password correct
 
-mysql -h database-1.c1q0e0awq6n7.ap-south-1.rds.amazonaws.com -u admin -p
-SHOW DATABASES;
-CREATE DATABASE db1;
-SHOW DATABASES;
-
-exit
-
+✅ Step 6: Run MySQL Commands
 
 
 
