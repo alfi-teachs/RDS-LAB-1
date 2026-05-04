@@ -259,27 +259,27 @@ sudo yum install -y mariadb
 ✔ Installs MySQL client to connect RDS
 
 # ✅ Step 5: Connect to RDS Database
-
+```bash
 mysql -h database-1.c1q0e0awq6n7.ap-south-1.rds.amazonaws.com -u admin -p
-
+```
 
 Enter password:
-
+```bash
 admin12345
-
+```
 # ✅ Step 6: Run MySQL Commands
-
+```bash
 SHOW DATABASES;
 
 CREATE DATABASE db1;
 
 SHOW DATABASES;
-
+```
 # ✅ Step 7: Exit MySQL
-
+```bash
 exit;
-
-🔹 (Optional) Step 8: Browser Login (phpMyAdmin)
+```
+#  Step 8: Browser Login (phpMyAdmin)
 
 If configured:
 
