@@ -21,19 +21,19 @@ Select Subnet (AZ)
 
 Security Group (Very Important):
 Add inbound rules:
+
 | type        | port         | source  |
 |-------------|--------------|---------|
 | SSH         | 22           | MY IP   |
 | CUSTOM TCP  | 8080         |  Anywhere (0.0.0.0/0) |
 
 
-type 
-
 Click Launch
 
-🔐 Connect
-connect to server 
-1. Connect to your EC2 instance
+🔹 Step 2: Connect to EC2
+```bash
+ssh -i key.pem ec2-user@<EC2-PUBLIC-IP>
+```
   
 2. Switch to root user
 ```bash
