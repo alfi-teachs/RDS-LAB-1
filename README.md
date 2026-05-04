@@ -76,10 +76,11 @@ docker pull phpmyadmin
 ```bash
 docker images
 ```
-```bash
+
 4. Run phpMyAdmin Container
-```
+   
 Usage with arbitrary server
+
 ```bash
 docker run --name phpmyadmin -d -e PMA_ARBITRARY=1 -p 8080:80 phpmyadmin
 ```
