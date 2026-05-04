@@ -43,7 +43,7 @@ sudo su
 ```bash
 yum update -y
 ```
-# step 3
+# Step 3
 1. Install Docker
 ```bash
 yum install docker -y
@@ -64,7 +64,7 @@ systemctl enable docker
 ```bash
 docker run hello-world
 ```
-# step 4
+# Step 4
 
 Steps to Run phpMyAdmin using Docker
 
