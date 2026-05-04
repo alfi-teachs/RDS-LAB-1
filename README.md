@@ -43,23 +43,23 @@ sudo su
 ```bash
 yum update -y
 ```
-5. Install Docker
+4. Install Docker
 ```bash
 yum install docker -y
 ```
-7. Start Docker service
+5. Start Docker service
 ```bash
 systemctl start docker
 ```
-9. Check Docker status
+6. Check Docker status
 ```bash
 systemctl status docker
 ```
-11. Enable Docker on boot (important)
+7. Enable Docker on boot (important)
 ```bash
 systemctl enable docker
 ```
-13. Test Docker
+8. Test Docker
 ```bash
 docker run hello-world
 ```
@@ -70,10 +70,10 @@ Steps to Run phpMyAdmin using Docker
 1. Pull phpMyAdmin Image from Docker Hub
 
 ```bash
-docker pull phpmyadmin
+docker pull phpmyadmin/phpmyadmin
 ```
 
-3. Verify Image Downloaded
+2. Verify Image Downloaded
 
 ```bash
 docker images
@@ -106,12 +106,14 @@ docker ps
 ```bash
 http://<EC2-PUBLIC-IP>:8080
 ```
-⚠️ Important
+# ⚠️ Important
 
 Make sure port 8080 is open in your EC2 Security Group
 
 You need a MySQL server to connect inside phpMyAdmin
 --------------------------------------------------------
+Create RDS MySQL Database
+
 # 🔹 Step 1: Open RDS Service
 
 Go to AWS Console
@@ -213,13 +215,16 @@ admin12345
 ```
 ---------------------------------------------------------------------------
 
-✅ Step 1: Ensure RDS is Ready
+# ✅ Step 1: Ensure RDS is Ready
 RDS MySQL instance status: Available
 Copy the RDS Endpoint
 
-✅ Step 2: Configure Security Groups
+# ✅ Step 2: Configure Security Groups
+
 🔸 RDS Security Group (Important)
+
 Go to RDS → Security Group → Inbound Rules
+
 Add:
 Type: MySQL/Aurora
 Port: 3306
@@ -228,6 +233,7 @@ Source: EC2 Security Group
 ✔ This allows EC2 to talk to RDS
 
 🔸 EC2 Security Group
+
 Default outbound is allowed ✅ (no change needed)
 
 (Optional — only if using browser tools later)
@@ -237,14 +243,14 @@ Type: Custom TCP
 Port: 8080
 Source: Anywhere (0.0.0.0/0)
 
-
-✅ Step 3: Connect to EC2
+# ✅ Step 3: Connect to EC2
 
 SSH into EC2:
 
 ssh -i key.pem ec2-user@<EC2-Public-IP>
 
-✅ Step 4: Install MySQL Client (Only)
+# ✅ Step 4: Install MySQL Client (Only)
+
 sudo yum update -y
 sudo yum install -y mariadb
 
@@ -252,7 +258,8 @@ sudo yum install -y mariadb
 ✔ Installs MySQL client to connect RDS
 
 
-✅ Step 5: Connect to RDS Database
+# ✅ Step 5: Connect to RDS Database
+
 mysql -h database-1.c1q0e0awq6n7.ap-south-1.rds.amazonaws.com -u admin -p
 
 
@@ -260,14 +267,16 @@ Enter password:
 
 admin12345
 
-✅ Step 6: Run MySQL Commands
+# ✅ Step 6: Run MySQL Commands
+
 SHOW DATABASES;
 
 CREATE DATABASE db1;
 
 SHOW DATABASES;
 
-✅ Step 7: Exit MySQL
+# ✅ Step 7: Exit MySQL
+
 exit;
 
 🔹 (Optional) Step 8: Browser Login (phpMyAdmin)
@@ -284,17 +293,25 @@ Username: admin
 Password: admin12345
 
 
-🔹 Final Architecture
+# 🔹 Final Architecture
+
 RDS → MySQL Database Server
+
 EC2 → Client machine (connects to RDS)
-🔥 Troubleshooting Checklist
+
+# 🔥 Troubleshooting Checklist
+
 RDS status = Available
+
 Correct endpoint used
+
 Port 3306 open in RDS SG
+
 EC2 & RDS in same VPC
+
 Username/password correct
 
-✅ Step 6: Run MySQL Commands
+
 
 
 
