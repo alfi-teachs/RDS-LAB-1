@@ -96,6 +96,15 @@ inbound rule
 custom tcp --- port 8080--- anywhere ip ===save
 
 copy ip paste:8080  in browser
+login: english
+serveer: copy endpoint url
+username: admin
+password
+
+mysql -h database-1.c1q0e0awq6n7.ap-south-1.rds.amazonaws.com -u admin -p
+SHOW DATABASES;
+CREATE DATABASE db1;
+SHOW DATABASES;
 
 
 
