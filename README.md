@@ -284,8 +284,10 @@ exit;
 If configured:
 
 URL:
-http://<EC2-Public-IP>:8080/phpmyadmin
 
+```bash
+http://<EC2-Public-IP>:8080/phpmyadmin
+```
 Login:
 Language: English
 Server: RDS Endpoint
