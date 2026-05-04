@@ -68,11 +68,13 @@ docker run hello-world
 Steps to Run phpMyAdmin using Docker
 
 1. Pull phpMyAdmin Image from Docker Hub
+
 ```bash
 docker pull phpmyadmin
 ```
-```bash
+
 3. Verify Image Downloaded
+
 ```bash
 docker images
 ```
@@ -95,10 +97,12 @@ What this does:
 -p 8080:80 → access via browser on port 8080
 
 4. Check Running Containers
+
 ```bash
 docker ps
 ```
 6. Access phpMyAdmin in Browser
+
 ```bash
 http://<EC2-PUBLIC-IP>:8080
 ```
