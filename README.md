@@ -250,13 +250,13 @@ SSH into EC2:
 ssh -i key.pem ec2-user@<EC2-Public-IP>
 
 # ✅ Step 4: Install MySQL Client (Only)
-
+```bash
 sudo yum update -y
+```
+```bash
 sudo yum install -y mariadb
-
-
+```
 ✔ Installs MySQL client to connect RDS
-
 
 # ✅ Step 5: Connect to RDS Database
 
