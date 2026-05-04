@@ -30,7 +30,7 @@ Add inbound rules:
 
 Click Launch
 
-#🔹 Step 2: Connect to EC2
+# Step 2: Connect to EC2
 ```bash
 ssh -i key.pem ec2-user@<EC2-PUBLIC-IP>
 ```
